@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 700px;
+            background-color: black;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Me", "label": "Me", "shape": "dot", "size": 10}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Intern", "label": "Intern", "shape": "dot", "size": 46, "title": " You arte connected to 23 people working as Intern in these companies: \nEtteh Aro and Partners \nZUGOTECH LABS LTD \nPort Harcourt Electricity Distribution Company \nNigerian Meteorological Agency (NIMET) \nFirst Independent Power Limited Company \nUbosi Eleh + Co. \nFirst City Monument Bank Limited \nNestl\u00e9 \nArup \nWelltec \nSchlumberger \nOPEX Oil and Gas Resources Limited \nAjeokuta Steel Company  \nGlobal Commerce Media GmbH \nAzusa Productions \nSALVATION MINISTRIES (HOME OF SUCCESS) \nJAC Motors Nigeria - Elizade Autoland \nHealth Strategy and Delivery Foundation \nDepartment of Petroleum Resources (DPR) \nMar\u0026Mor Integrated Services Ltd \nUBA Group \nHK Designs \nEfficacy Construction Company"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Software Engineer", "label": "Software Engineer", "shape": "dot", "size": 32, "title": " You arte connected to 16 people working as Software Engineer in these companies: \nVicinio Enterprises \nB54 Financial Services \nSimpu Inc \nTwitter \nSolutaris LLC/InfoWARE Limited Partnership \nFirst Bank of Nigeria Ltd. \nHanspet technologies \nHolberton School \nKwaba \nQuickCheck \nShareablee, Inc \nLuminovo \nFiatMatch \nYouverify \nRoadtrip \nPleo"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Internship Trainee", "label": "Internship Trainee", "shape": "dot", "size": 22, "title": " You arte connected to 11 people working as Internship Trainee in these companies: \nUAC Foods Limited \nChevron \nHuawei \nAnambra State ICT Agency \nAERO TAK LIMITED \nNEW USUAL LTD. \nNAFDAC Nigeria \nNew Horizons Computer Learning Centers Nigeria \nAsonic Associates Limited \nR. T. Briscoe (Nigeria) Plc \nCAKASA (NIGERIA) COMPANY LIMITED"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Data Analyst", "label": "Data Analyst", "shape": "dot", "size": 16, "title": " You arte connected to 8 people working as Data Analyst in these companies: \nNIIT Limited \nVoltaware \nTAC professional Services \nAvailable for new opportunities \nHuawei \nBrainiacs STEM and Robotics \nALX-T"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Product Designer", "label": "Product Designer", "shape": "dot", "size": 14, "title": " You arte connected to 7 people working as Product Designer in these companies: \nJumbleng \nE-MARGINATION STUDIOS \nFixusNg \nCrown Interactive Limited \nB54 \nThe Tonic Technologies LTD \nTrade Maxi"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Student Intern", "label": "Student Intern", "shape": "dot", "size": 14, "title": " You arte connected to 7 people working as Student Intern in these companies: \nDochase Adx \nInternet Solutions Nigeria Limited \nSalvation Ministries Cathedral Project \nND Western Limited \nGBC Murphy Limited \nNPDC, A Subsidiary of NNPC \nSkystar Global Solutions Limited"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Engineering Intern", "label": "Engineering Intern", "shape": "dot", "size": 12, "title": " You arte connected to 6 people working as Engineering Intern in these companies: \nFirst Independent Power Limited Company \nNigerian Breweries Plc \nNestl\u00e9 \nTadoben Corporate Int\u0027l Ltd \nCappa and D\u0027Alberto Ltd"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Business Analyst", "label": "Business Analyst", "shape": "dot", "size": 12, "title": " You arte connected to 6 people working as Business Analyst in these companies: \nBoston Consulting Group (BCG) \nBalance\u00e9.app \nQuCoon Limited \nCrown Interactive Limited \nGAS360 \nThe49"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Product Manager", "label": "Product Manager", "shape": "dot", "size": 10, "title": " You arte connected to 5 people working as Product Manager in these companies: \nGrow With Path \nICE Commercial Power \nCymax Group Technologies \nTranos \nSecured Records Management Solutions LTD"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Founder", "label": "Founder", "shape": "dot", "size": 10, "title": " You arte connected to 5 people working as Founder in these companies: \nGrow With Path \nCrunchi-me \nStofel \nAudacia  \nTehillah Productions"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Project Manager", "label": "Project Manager", "shape": "dot", "size": 10, "title": " You arte connected to 5 people working as Project Manager in these companies: \nIntegrated Builders LTD \nTmont Gear Interiors \nCrecer Building Services \nMidland Educational Foundation (MEF) \nOne Accord Initiative"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Chief Executive Officer", "label": "Chief Executive Officer", "shape": "dot", "size": 10, "title": " You arte connected to 5 people working as Chief Executive Officer in these companies: \nZoropay  \nGracePlus Restaurant Limited  \nAgrohusk Wares \nFoosion \nPlotter NG"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Frontend Developer", "label": "Frontend Developer", "shape": "dot", "size": 8, "title": " You arte connected to 4 people working as Frontend Developer in these companies: \nCloudWare Technologies \nEkoAnalytics \nSwifta Systems and Services \nGenesys Tech Hub"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Mechanical Engineer", "label": "Mechanical Engineer", "shape": "dot", "size": 8, "title": " You arte connected to 4 people working as Mechanical Engineer in these companies: \nTesla \nECM Terminals Limited \nNigerian National Petroleum Company Limited \nIndorama Eleme Fertilzer and Chemicals Limited"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Lecturer", "label": "Lecturer", "shape": "dot", "size": 8, "title": " You arte connected to 4 people working as Lecturer in these companies: \nCovenant University,Ota, Nigeria \nAditya D Y Patil University  \nLagos State University \nCovenant University"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Electrical Engineer", "label": "Electrical Engineer", "shape": "dot", "size": 8, "title": " You arte connected to 4 people working as Electrical Engineer in these companies: \nTotal \nPETROLEUM TECHNOLOGY DEVELOPMENT FUND \nMinistry of Works  \nM \u0026 E Kaiser Limited"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Social Media Manager", "label": "Social Media Manager", "shape": "dot", "size": 8, "title": " You arte connected to 4 people working as Social Media Manager in these companies: \nFlorida Institute for Child Welfare \nEkondo \nMetro and Castle Limited \nDrew Studios"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Graduate Engineer", "label": "Graduate Engineer", "shape": "dot", "size": 8, "title": " You arte connected to 4 people working as Graduate Engineer in these companies: \nKTV Group AS \nDeltec Engineering Ltd. \nGreenpeg Engineering \nFederal Capital Territory Administration"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "CEO", "label": "CEO", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as CEO in these companies: \nDigital Voting System  ltd \nKND Media \nInfinion Technologies"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Graduate Intern", "label": "Graduate Intern", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Graduate Intern in these companies: \nGEOCARDINAL ENGINEERING SERVICES LIMITED \nStockgap Fuels Limited \nECOWAS Commission"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Frontend Engineer", "label": "Frontend Engineer", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Frontend Engineer in these companies: \nVIBRANTCREATOR \nTeamApt \nprepend GmbH"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Managing Director", "label": "Managing Director", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Managing Director in these companies: \nHypeMan Africa \nRedwood Consulting Limited \nGoldenville Schools"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Public Relations Officer", "label": "Public Relations Officer", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Public Relations Officer in these companies: \nSociety of Architecture Students, Covenant University \nAnna Foundationng  \nHebron motorsports"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Graphic Designer", "label": "Graphic Designer", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Graphic Designer in these companies: \nCrown Branding Agency \nHelgg  \nTouchstone Mission Baptist Church"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Administrative Assistant", "label": "Administrative Assistant", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Administrative Assistant in these companies: \nThe Polytechnic, Ibadan \nHebron Startup Lab \nRivers State University"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Management Consultant", "label": "Management Consultant", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Management Consultant in these companies: \nRESSA PROJECT NIGERIA \nKPMG Nigeria \nRage Media Group"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Co-Founder", "label": "Co-Founder", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Co-Founder in these companies: \nTranscendeals  \nReflect Robotics \nDimeafrica"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Electrical Engineering Intern", "label": "Electrical Engineering Intern", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Electrical Engineering Intern in these companies: \nDangote Industries Limited \nNigerian Petroleum Development Company Limited \nEgbin Power PLC"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Mechanical Engineering Intern", "label": "Mechanical Engineering Intern", "shape": "dot", "size": 6, "title": " You arte connected to 3 people working as Mechanical Engineering Intern in these companies: \nWeststar Associates Limited \nAero Contractors of Nigeria Ltd \nStallion Motors"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "DevOps Engineer", "label": "DevOps Engineer", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as DevOps Engineer in these companies: \nPaylode Services \nNautilus Technologies HQ"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Software Engineer Intern", "label": "Software Engineer Intern", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Software Engineer Intern in these companies: \nWhite Creativity \nCerveApp"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Associate", "label": "Associate", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Associate in these companies: \nGoldman Sachs \nT \u0026 A Legal"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Human Resources Intern", "label": "Human Resources Intern", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Human Resources Intern in these companies: \neHealth Africa \nNestl\u00e9"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Investment Analyst", "label": "Investment Analyst", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Investment Analyst in these companies: \nBK Capital Ltd \nArgentil Group"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Student Member", "label": "Student Member", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Student Member in these companies: \nTechnical unit (Covenant University Chaplaincy) \nAIChE - American Institute of Chemical Engineers"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Operations Lead", "label": "Operations Lead", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Operations Lead in these companies: \nSelbolt \nVoltron Capital"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Back End Developer", "label": "Back End Developer", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Back End Developer in these companies: \nSystemSpecs Group \nDantown"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Engineer Intern", "label": "Engineer Intern", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Engineer Intern in these companies: \nQuest Oil Group \nHuawei"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Director", "label": "Director", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Director in these companies: \nICET Educational Consultants \nTeaching and Learning Consortium Ltd."}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Civil Engineer", "label": "Civil Engineer", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Civil Engineer in these companies: \nEarthpoint Modern Shelter \nSETRACO GROUP"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Digital Marketing Specialist", "label": "Digital Marketing Specialist", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Digital Marketing Specialist in these companies: \nTechstart \nexpertnaire"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Project Engineer", "label": "Project Engineer", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Project Engineer in these companies: \nPivot-GIS \nHuawei"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Executive Trainee", "label": "Executive Trainee", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Executive Trainee in these companies: \nGlobus Bank \nVerraki Africa"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Project Manager Team Lead", "label": "Project Manager Team Lead", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Project Manager Team Lead in these companies: \nSEWATECH NIGERIA LIMITED \n4 Sure Tips "}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Audit Intern", "label": "Audit Intern", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Audit Intern in these companies: \nKPMG Nigeria \nParlance AC"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Account Officer", "label": "Account Officer", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Account Officer in these companies: \nFidelity Bank PLC \nAccess Bank Plc"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Data Engineer", "label": "Data Engineer", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Data Engineer in these companies: \nB54 \nRifitel Nigeria Limited"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Chairperson", "label": "Chairperson", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Chairperson in these companies: \nConvocation Planning Committee, Covenant University \nFMN Women Network"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Graduate Engineering Trainee", "label": "Graduate Engineering Trainee", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Graduate Engineering Trainee in these companies: \nNovateur Nigeria \nBUA Sugar Refinery"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Data Science Intern", "label": "Data Science Intern", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Data Science Intern in these companies: \nSyrup Tech \nHamoye.com"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Brand Designer", "label": "Brand Designer", "shape": "dot", "size": 4, "title": " You arte connected to 2 people working as Brand Designer in these companies: \nBCSL (Benjamindada.com) \nPaystack"}]);
+        edges = new vis.DataSet([{"color": "grey", "from": "Me", "label": 1, "to": "Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Software Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Internship Trainee", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Data Analyst", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Product Designer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Student Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Engineering Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Business Analyst", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Product Manager", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Founder", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Project Manager", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Chief Executive Officer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Frontend Developer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Mechanical Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Lecturer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Electrical Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Social Media Manager", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Graduate Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "CEO", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Graduate Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Frontend Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Managing Director", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Public Relations Officer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Graphic Designer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Administrative Assistant", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Management Consultant", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Co-Founder", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Electrical Engineering Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Mechanical Engineering Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "DevOps Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Software Engineer Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Associate", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Human Resources Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Investment Analyst", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Student Member", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Operations Lead", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Back End Developer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Engineer Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Director", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Civil Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Digital Marketing Specialist", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Project Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Executive Trainee", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Project Manager Team Lead", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Audit Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Account Officer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Data Engineer", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Chairperson", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Graduate Engineering Trainee", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Data Science Intern", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Brand Designer", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "hierarchicalRepulsion": {
+            "centralGravity": 0.0,
+            "damping": 0.09,
+            "nodeDistance": 120,
+            "springConstant": 0.01,
+            "springLength": 100
+        },
+        "solver": "hierarchicalRepulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

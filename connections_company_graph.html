@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 700px;
+            background-color: black;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Me", "label": "Me", "shape": "dot", "size": 10}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Covenant University", "label": "Covenant University", "shape": "dot", "size": 30, "title": " From, Covenant University you have 15 connections. These are their positions: \nCovenant University Mechanical Engineering Student Association Chaplain \nCommunity Development, Facilitation, and Research \nPresident, CUMESA \nFull Professor \nGraduate \nGraduate Research And Teaching Assistant \nStudent \nAssistant Welfare Secretary, CUMESA \nComputer Technician \nLecturer \nProfessor of Communication Engineering | Head, loT-Enabled Smart \u0026 Connected Communities Research \nHead Of Department, Mechanical Engineering \nStudent Worker \nProfessor \nCollege of Engineering Representative, Covenant University Student Council"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Huawei", "label": "Huawei", "shape": "dot", "size": 16, "title": " From, Huawei you have 8 connections. These are their positions: \nProject Engineer \nBack Office Data Communication Engineer \nInternship Trainee \nEngineer Intern \nData Analyst \nInformation Technology Infrastructure Engineer (Cloud Computing \u0026 Data Storage) \nProduct Engineer"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Nestl\u00e9", "label": "Nestl\u00e9", "shape": "dot", "size": 10, "title": " From, Nestl\u00e9 you have 5 connections. These are their positions: \nDistributor Development Data Analyst \nEngineering Intern \nHead, Fund Accounting- Nestle Nigeria Trust (CPFA) Limited \nIntern \nHuman Resources Intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Aero Contractors of Nigeria Ltd", "label": "Aero Contractors of Nigeria Ltd", "shape": "dot", "size": 10, "title": " From, Aero Contractors of Nigeria Ltd you have 5 connections. These are their positions: \nMechanical Engineering Intern \nIndustrial Trainee (Avionics) \nAircraft Maintenance Engineering Intern \nSafety and Quality  Inspector \nOJT"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Verraki Africa", "label": "Verraki Africa", "shape": "dot", "size": 8, "title": " From, Verraki Africa you have 4 connections. These are their positions: \nRPA Developer \nExecutive Trainee \nGraduate Trainee Associate -Technology Solutions \nSolutions Analyst"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "First Independent Power Limited Company", "label": "First Independent Power Limited Company", "shape": "dot", "size": 6, "title": " From, First Independent Power Limited Company you have 3 connections. These are their positions: \nIntern \nEngineering Intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Covenant University Finance Society (CUFS) ", "label": "Covenant University Finance Society (CUFS) ", "shape": "dot", "size": 6, "title": " From, Covenant University Finance Society (CUFS)  you have 3 connections. These are their positions: \nVice President \nAsst career development lead \nManagement Consulting Team Lead"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Schlumberger", "label": "Schlumberger", "shape": "dot", "size": 6, "title": " From, Schlumberger you have 3 connections. These are their positions: \nField Engineer \nIntern \nSAP Specialist "}, {"color": "#3449eb", "font": {"color": "white"}, "id": "KPMG Nigeria", "label": "KPMG Nigeria", "shape": "dot", "size": 6, "title": " From, KPMG Nigeria you have 3 connections. These are their positions: \nManagement Consultant \nAudit Intern \nAudit Intern (Energy and Natural Resources)"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Tranos", "label": "Tranos", "shape": "dot", "size": 6, "title": " From, Tranos you have 3 connections. These are their positions: \nProduct Manager \nDesign Engineering Intern \nJunior Production Engineer"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Infinion Technologies", "label": "Infinion Technologies", "shape": "dot", "size": 6, "title": " From, Infinion Technologies you have 3 connections. These are their positions: \nFinance Officer \nUI/UX Designer \nCEO"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Helgg ", "label": "Helgg ", "shape": "dot", "size": 6, "title": " From, Helgg  you have 3 connections. These are their positions: \nCo-Founder and Product Manager \nVideo Editor \nGraphic Designer"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Deloitte", "label": "Deloitte", "shape": "dot", "size": 6, "title": " From, Deloitte you have 3 connections. These are their positions: \nRisk advisory \nCyber Security Consultant \nGovernance, Regulation \u0026 Risk Associate"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "EY", "label": "EY", "shape": "dot", "size": 4, "title": " From, EY you have 2 connections. These are their positions: \nAssistant Manager, Strategy and Transactions \nData \u0026 Analytics Consultant"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Federal Mortgage Bank of Nigeria", "label": "Federal Mortgage Bank of Nigeria", "shape": "dot", "size": 4, "title": " From, Federal Mortgage Bank of Nigeria you have 2 connections. These are their positions: \nLoan Officer \nData Management Specialist"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Nigerian Breweries Plc", "label": "Nigerian Breweries Plc", "shape": "dot", "size": 4, "title": " From, Nigerian Breweries Plc you have 2 connections. These are their positions: \nInformation Communication Intern \nEngineering Intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Stallion Motors", "label": "Stallion Motors", "shape": "dot", "size": 4, "title": " From, Stallion Motors you have 2 connections. These are their positions: \nService Advisor \nMechanical Engineering Intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "KPMG", "label": "KPMG", "shape": "dot", "size": 4, "title": " From, KPMG you have 2 connections. These are their positions: \nSenior Consultant, Cyber Security \nAudit Analyst"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Pertinence Group", "label": "Pertinence Group", "shape": "dot", "size": 4, "title": " From, Pertinence Group you have 2 connections. These are their positions: \nBack-end Developer \nGroup CEO"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Amazon Web Services (AWS)", "label": "Amazon Web Services (AWS)", "shape": "dot", "size": 4, "title": " From, Amazon Web Services (AWS) you have 2 connections. These are their positions: \nProfessional Services \nManager, Startup Solutions Architect"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Rehoboth Recruiters", "label": "Rehoboth Recruiters", "shape": "dot", "size": 4, "title": " From, Rehoboth Recruiters you have 2 connections. These are their positions: \nExecutive Director-Talent Acquisition  \nRecruitment Assistant"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Mar\u0026Mor Engineering Services Ltd", "label": "Mar\u0026Mor Engineering Services Ltd", "shape": "dot", "size": 4, "title": " From, Mar\u0026Mor Engineering Services Ltd you have 2 connections. These are their positions: \nQuality Assurance Quality Control \nLead Estimator"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Goldman Sachs", "label": "Goldman Sachs", "shape": "dot", "size": 4, "title": " From, Goldman Sachs you have 2 connections. These are their positions: \nAssociate \nSoftware Engineer - Analyst"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Kohasa Engineering Company Limited", "label": "Kohasa Engineering Company Limited", "shape": "dot", "size": 4, "title": " From, Kohasa Engineering Company Limited you have 2 connections. These are their positions: \nHuman Resource Officer \nIndustrial Trainee"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Grow With Path", "label": "Grow With Path", "shape": "dot", "size": 4, "title": " From, Grow With Path you have 2 connections. These are their positions: \nFounder \nProduct Manager"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Crown Interactive Limited", "label": "Crown Interactive Limited", "shape": "dot", "size": 4, "title": " From, Crown Interactive Limited you have 2 connections. These are their positions: \nBusiness Analyst \nProduct Designer"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Montessori International Group Of Schools (M.I.S) PH", "label": "Montessori International Group Of Schools (M.I.S) PH", "shape": "dot", "size": 4, "title": " From, Montessori International Group Of Schools (M.I.S) PH you have 2 connections. These are their positions: \nExecutive Management Associate \nAdministrator (Senior Secondary Arm of the School)"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Chevron", "label": "Chevron", "shape": "dot", "size": 4, "title": " From, Chevron you have 2 connections. These are their positions: \nInternship Trainee \nTechnical Services Intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Aircom Nigeria Limited", "label": "Aircom Nigeria Limited", "shape": "dot", "size": 4, "title": " From, Aircom Nigeria Limited you have 2 connections. These are their positions: \nPower Engineer \nIT Support Specialist"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "WorldQuant University", "label": "WorldQuant University", "shape": "dot", "size": 4, "title": " From, WorldQuant University you have 2 connections. These are their positions: \nChief Data Scientist \nTeaching Assistant"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Goldsprings High School", "label": "Goldsprings High School", "shape": "dot", "size": 4, "title": " From, Goldsprings High School you have 2 connections. These are their positions: \nExecutive Secretary \nTeacher"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "UBA Group", "label": "UBA Group", "shape": "dot", "size": 4, "title": " From, UBA Group you have 2 connections. These are their positions: \nTechnical Assistant: Directorate Head \nIntern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "TeamApt", "label": "TeamApt", "shape": "dot", "size": 4, "title": " From, TeamApt you have 2 connections. These are their positions: \nFrontend Engineer \nExecutive Recruiter | Corporate HeadHunter"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Twitter", "label": "Twitter", "shape": "dot", "size": 4, "title": " From, Twitter you have 2 connections. These are their positions: \nSoftware Engineer \nSenior Product Marketing Manager - Global Consumer Products "}, {"color": "#3449eb", "font": {"color": "white"}, "id": "B54", "label": "B54", "shape": "dot", "size": 4, "title": " From, B54 you have 2 connections. These are their positions: \nData Engineer \nProduct Designer"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Hamoye.com", "label": "Hamoye.com", "shape": "dot", "size": 4, "title": " From, Hamoye.com you have 2 connections. These are their positions: \nData Scientist \nData Science Intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Ericsson", "label": "Ericsson", "shape": "dot", "size": 4, "title": " From, Ericsson you have 2 connections. These are their positions: \nIntegration Engineer \nIT System Expert (Intelligent Network)"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Port Harcourt Electricity Distribution Company", "label": "Port Harcourt Electricity Distribution Company", "shape": "dot", "size": 4, "title": " From, Port Harcourt Electricity Distribution Company you have 2 connections. These are their positions: \nAssistant Workshop Manager (NYSC) \nIntern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "expertnaire", "label": "expertnaire", "shape": "dot", "size": 4, "title": " From, expertnaire you have 2 connections. These are their positions: \nDigital Marketing Specialist \nAffiliate Marketing Specialist"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "FirstBank Nigeria", "label": "FirstBank Nigeria", "shape": "dot", "size": 4, "title": " From, FirstBank Nigeria you have 2 connections. These are their positions: \nBanking \nStrategy Associate"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "ECOWAS Commission", "label": "ECOWAS Commission", "shape": "dot", "size": 4, "title": " From, ECOWAS Commission you have 2 connections. These are their positions: \nGraduate Intern \nN.Y.S.C Intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Enactus Nigeria", "label": "Enactus Nigeria", "shape": "dot", "size": 4, "title": " From, Enactus Nigeria you have 2 connections. These are their positions: \nTechnical Team Member Enactus Covenant University \nEntrepreneur"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Bolt", "label": "Bolt", "shape": "dot", "size": 4, "title": " From, Bolt you have 2 connections. These are their positions: \nOperations \nOperations Coordinator"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Schneider Electric", "label": "Schneider Electric", "shape": "dot", "size": 4, "title": " From, Schneider Electric you have 2 connections. These are their positions: \nProject Coordinator - Sustainable Development \nProgram manager - Electricians Channel"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Rivers State University", "label": "Rivers State University", "shape": "dot", "size": 4, "title": " From, Rivers State University you have 2 connections. These are their positions: \nNYSC Graduate Assistant Lecturer \nAdministrative Assistant"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Foosion", "label": "Foosion", "shape": "dot", "size": 4, "title": " From, Foosion you have 2 connections. These are their positions: \nChief Executive Officer \nContent Writer"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Sterling Bank Plc", "label": "Sterling Bank Plc", "shape": "dot", "size": 4, "title": " From, Sterling Bank Plc you have 2 connections. These are their positions: \nInternal Auditor \nBusiness Intelligence Analyst"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "NielsenIQ", "label": "NielsenIQ", "shape": "dot", "size": 4, "title": " From, NielsenIQ you have 2 connections. These are their positions: \nOperations Associate \nDA Delivery support intern "}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Softcom Limited", "label": "Softcom Limited", "shape": "dot", "size": 4, "title": " From, Softcom Limited you have 2 connections. These are their positions: \nProduct Manager, Learning and Development \nInclusion intern"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Hebron Startup Lab", "label": "Hebron Startup Lab", "shape": "dot", "size": 4, "title": " From, Hebron Startup Lab you have 2 connections. These are their positions: \nCommunity Manager \nAdministrative Assistant"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Green Africa", "label": "Green Africa", "shape": "dot", "size": 4, "title": " From, Green Africa you have 2 connections. These are their positions: \nFirst Officer \nInformation Technology and Innovation Specialist"}]);
+        edges = new vis.DataSet([{"color": "grey", "from": "Me", "label": 1, "to": "Covenant University", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Huawei", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Nestl\u00e9", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Aero Contractors of Nigeria Ltd", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Verraki Africa", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "First Independent Power Limited Company", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Covenant University Finance Society (CUFS) ", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Schlumberger", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "KPMG Nigeria", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Tranos", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Infinion Technologies", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Helgg ", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Deloitte", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "EY", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Federal Mortgage Bank of Nigeria", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Nigerian Breweries Plc", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Stallion Motors", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "KPMG", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Pertinence Group", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Amazon Web Services (AWS)", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Rehoboth Recruiters", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Mar\u0026Mor Engineering Services Ltd", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Goldman Sachs", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Kohasa Engineering Company Limited", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Grow With Path", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Crown Interactive Limited", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Montessori International Group Of Schools (M.I.S) PH", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Chevron", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Aircom Nigeria Limited", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "WorldQuant University", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Goldsprings High School", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "UBA Group", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "TeamApt", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Twitter", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "B54", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Hamoye.com", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Ericsson", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Port Harcourt Electricity Distribution Company", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "expertnaire", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "FirstBank Nigeria", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "ECOWAS Commission", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Enactus Nigeria", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Bolt", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Schneider Electric", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Rivers State University", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Foosion", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Sterling Bank Plc", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "NielsenIQ", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Softcom Limited", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Hebron Startup Lab", "weight": 1}, {"color": "grey", "from": "Me", "label": 1, "to": "Green Africa", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "hierarchicalRepulsion": {
+            "centralGravity": 0.0,
+            "damping": 0.09,
+            "nodeDistance": 120,
+            "springConstant": 0.01,
+            "springLength": 100
+        },
+        "solver": "hierarchicalRepulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
