@@ -48,10 +48,10 @@ I used the NetworkX Python package to create the network graph and the Pyvis net
 
 ### Acknowledgement:
 
-- I would like to acknowledge the medium post that inspired this project available at: 
-https://medium.com/bitgrit-data-science-publication/visualize-your-linkedin-network-with-python-59a213786c4
+- I would like to acknowledge the medium [article](https://medium.com/bitgrit-data-science-publication/visualize-your-linkedin-network-with-python-59a213786c4) that inspired this project.
 
-- I would also like to acknowledge "Thu Vu data analytics". It was while watching this YouTube video that I 
-saw the above mentioned article: https://www.youtube.com/watch?v=nNfco7k7Hi0
 
-**My LinkedIn Profile:** https://www.linkedin.com/in/triumph-urias-4812b8108/
+- I would also like to acknowledge "Thu Vu data analytics". It was while watching this YouTube [video](https://www.youtube.com/watch?v=nNfco7k7Hi0
+) that I saw the above mentioned article. 
+
+**My LinkedIn Profile:** [Urias, Triumph](https://www.linkedin.com/in/triumph-urias-4812b8108/)
